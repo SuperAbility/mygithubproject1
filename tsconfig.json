@@ -1,0 +1,61 @@
+{
+  //TS转换成JS文件的一些配置
+  //比如TS最终转换成ES5,ES6,ES7,ES8哪个语法进行编译在这个里面设置........
+  /* compilerOptions:编译选项 */
+  "compilerOptions": {
+    /*
+    //1------目标代码.默认情况下是ts代码，ts转换的那个语言目标是哪个语言
+    //是哪个版本，比如ts目标转换的语言是JS版本是es5----
+     "target": "esnext"就是这个作用esnext-----ES6以后的版本都是esnext
+     babel会最终对TS进行转换的
+     如果是通过TSC来转换TS代码而不是babel----那这个target就要写es5了
+     不然最终转换的不是你想要的代码，不过babel不需要考虑target这个属性
+     */
+    "target": "esnext",
+    //2----目标代码需要使用的模块化方案
+    //(commonjs require esmodule模块化就生成什么代码)
+    //umd代表支持多种模块化语言转换
+    "module": "esnext",
+    //3-----严格模式：打开代码严格检查（any)
+    "strict": true,
+    //4----要不要对我们的jsx代码进行怎么样的处理  preserve---保留原来JSx代码
+    //现在还是什么样子不需要转换
+    "jsx": "preserve",
+    //5---------辅助的导入代码（有一些代码用了一些语法本身浏览器不支持，对这些语言放到
+    //一个独立的文件里面通过import引入
+    "importHelpers": true,
+    //6--------------按照node方式去解析模块
+    "moduleResolution": "node",
+    //7------跳过对一些库的类型检测(axios--类型 ,loadsh,其他第三方库，)增加类型
+    //库里面重复类型会跳过检测
+    "skipLibCheck": true,
+    //8---------export default 和module.export能不能混合使用
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    //9-------要不要生成映射的文件
+    "sourceMap": true,
+    //10------文件路径在解析时候基本的url
+    "baseUrl": ".",
+    //11------指定具体解析使用的类型
+    "types": ["webpack-env"],
+    //12-----路径解析
+    "paths": {
+      "@/*": ["src/*"],
+      //保证设置路径别名时候使用components会报错
+ "components/*": ["src/components/*"]
+    },
+    //指定在项目中可以使用那些库里面的类型（proxy/windows/document
+    //就是ES6 DOM里面的类型都可以在ts里面使用
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  //当前项目下哪些文件会进行解析的
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  //排除那些文件
+  "exclude": ["node_modules"]
+}
